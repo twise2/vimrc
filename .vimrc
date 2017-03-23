@@ -1,8 +1,8 @@
-"colorscheme
-set background=dark
+"set syntax basics
 syntax enable
+set background=dark
+"colorscheme
 colorscheme badwolf
-set t_Co=256
 
 "sets comments to lightblue rather than default grey
 hi Comment      ctermfg=lightblue
