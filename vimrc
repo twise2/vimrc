@@ -74,7 +74,6 @@ set smarttab
 "set line numbers"
 set number              " show line numbers
 set showcmd             " show command in bottom bar
-set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
@@ -83,6 +82,17 @@ set showmatch           " highlight matching [{()}]
 "remaps
 nnoremap j gj
 nnoremap k gk
+
+"set persistent undo
+set undodir=/Users/Twise78738/.vim/undo//
+set undofile
+set undolevels=1000
+set undoreload=10000
+
+"persistent cursor
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 "sets autocomplete function to on
 filetype plugin on
