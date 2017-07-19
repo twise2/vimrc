@@ -2,8 +2,10 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set up vundle if not set up
+let iCanHazVundle=1
 if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
     !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    let iCanHazVundle=0
 endif
 
 " set the runtime path to include Vundle and initialize
@@ -52,6 +54,12 @@ Plugin 'hdima/python-syntax'
 "  Colorshceme
 Plugin 'sjl/badwolf'
 
+
+if iCanHazVundle == 0
+    echo "Installing Vundles, please ignore key map error messages"
+    echo ""
+    :PluginInstall
+endif
 call vundle#end()            " required
 
 filetype plugin indent on    " required
