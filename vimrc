@@ -1,6 +1,11 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" set up vundle if not set up
+if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
+    !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+endif
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 "call vundle#begin()
@@ -44,7 +49,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'othree/xml.vim'
 "  Python
 Plugin 'hdima/python-syntax'
-
+"  Colorshceme
+Plugin 'sjl/badwolf'
 
 call vundle#end()            " required
 
