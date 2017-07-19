@@ -42,6 +42,8 @@ Plugin 'indenthtml.vim'
 Plugin 'mattn/emmet-vim'
 "   XML
 Plugin 'othree/xml.vim'
+"  Python
+Plugin 'hdima/python-syntax'
 
 
 call vundle#end()            " required
