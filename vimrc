@@ -1,3 +1,4 @@
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -102,10 +103,19 @@ nnoremap j gj
 nnoremap k gk
 
 "set persistent undo
-set undodir=/Users/Twise78738/.vim/undo//
-set undofile
-set undolevels=1000
-set undoreload=10000
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
 
 "persistent cursor
 if has("autocmd")
@@ -154,8 +164,12 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
+<<<<<<< HEAD
 let g:syntastic_javascript_checkers = ['eslint']
 
 "map :W to save because i can't type
 :map :W :w
 
+=======
+let g:syntastic_javascript_checkers = ['jslint']
+>>>>>>> 28da95ff5186d54f553b66ed3cd7596fc2a77535
