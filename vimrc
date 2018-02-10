@@ -154,5 +154,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
-let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_javascript_checkers = ['eslint']
+
+"map :W to save because i can't type
+:map :W :w
 
