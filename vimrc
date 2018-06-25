@@ -1,175 +1,127 @@
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set up vundle if not set up
+" Disable compatibility with vi "
+set nocompatible
+ 
+" Set up Vundle if needed "
 let iCanHazVundle=1
 if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
     !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     let iCanHazVundle=0
 endif
-
-" set the runtime path to include Vundle and initialize
+ 
+" Vundle "
 set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
 call vundle#rc()
-" " let Vundle manage Vundle, required
+" rclet Vundle manage Vundle, required "
 Plugin 'VundleVim/Vundle.vim'
-" added nerdtree
 Plugin 'scrooloose/nerdtree'
-"supertab
 Plugin 'ervandew/supertab'
-"vi-fugitive
 Plugin 'tpope/vim-fugitive'
-"vim polyglot 
 Plugin 'sheerun/vim-polyglot'
-"vim sensible
 Plugin 'tpope/vim-sensible'
-"cntrl-P
 Plugin 'kien/ctrlp.vim'
-"NGINX syntax shit
 Plugin 'mutewinter/nginx.vim'
-" Search helper
 Plugin 'henrik/vim-indexed-search'
-"Syntastic 
 Plugin 'Syntastic'
-"Airline for Powerline
 Plugin 'vim-airline/vim-airline'
-"   Ruby
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-bundler'
-"   JavaScript
 Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'leshill/vim-json'
-"   HTML
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plugin 'othree/html5.vim'
 Plugin 'indenthtml.vim'
 Plugin 'mattn/emmet-vim'
-"   XML
 Plugin 'othree/xml.vim'
-"  Python
 Plugin 'hdima/python-syntax'
-"  Colorshceme
-Plugin 'sjl/badwolf'
-"Read texts in vim
 Plugin 'vim-scripts/textutil.vim'
-
-
+Plugin 'aliou/sql-heredoc.vim'
+Plugin 'flazz/vim-colorschemes'
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
     echo ""
     :PluginInstall
 endif
-call vundle#end()            " required
-
-filetype plugin indent on    " required
-set shell=/bin/bash "for use with fish shell
-
-"sets comments to lightblue rather than default grey
-hi Comment      ctermfg=lightblue
-
-"sets cursorline to be bold and not white underline
+call vundle#end()
+ 
+filetype plugin indent on
+ 
+" Formatting "
+hi Comment      ctermfg=lightblue " Set comments to light blue "
 set cursorline
-hi CursorLine term=bold cterm=bold guibg=Grey40
-
-"make backspace work like it should
-set backspace=indent,eol,start
-
-"search chages
-set ignorecase " case insensitive
-set hlsearch   " search highlighting
-set incsearch           " search as characters are entered
-
-"smart tab options
-set tabstop=2       " number of visual spaces per TAB
-set softtabstop=0   " number of spaces in tab when editing
+hi CursorLine term=bold cterm=bold guibg=Grey40 " sets cursorline to be bold and not white underline "
+set backspace=indent,eol,start                  " make backspace work like it should "
+set ignorecase      " case insensitive search "
+set hlsearch        " search highlighting "
+set incsearch       " search as characters are entered "
+set tabstop=2       " number of visual spaces per tab "
+set softtabstop=0   " number of spaces in tab when editing "
 set shiftwidth=2
-set expandtab       " tabs are spaces
+set expandtab       " tabs are spaces "
 set smarttab
-
-"set line numbers"
-set number              " show line numbers
-set showcmd             " show command in bottom bar
-filetype indent on      " load filetype-specific indent files
-set wildmenu            " visual autocomplete for command menu
-set lazyredraw          " redraw only when we need to.
-set showmatch           " highlight matching [{()}]
-
-"remaps
-nnoremap j gj
-nnoremap k gk
-
-"set persistent undo
-" Put plugins and dictionaries in this dir (also on Windows)
-let vimDir = '$HOME/.vim'
-let &runtimepath.=','.vimDir
-
-" Keep undo history across sessions by storing it in a file
-if has('persistent_undo')
-    let myUndoDir = expand(vimDir . '/undodir')
-    " Create dirs
-    call system('mkdir ' . vimDir)
-    call system('mkdir ' . myUndoDir)
-    let &undodir = myUndoDir
-    set undofile
-endif
-
-"persistent cursor
+set number          " show line numbers "
+set showcmd         " show command in bottom bar "
+filetype indent on  " load filetype-specific indent files "
+set wildmenu        " visual autocomplete for command menu "
+set lazyredraw      " redraw only when we need to. "
+set showmatch       " highlight matching [{()}] "
+syntax on
+set t_Co=256
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+colorscheme badwolf
+ 
+" Keyboard "
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-"sets autocomplete function to on
+nnoremap j gj
+nnoremap k gk
+:map :W :w
+:map :Q :q
+:map :WQ :wq
+:map :wQ :wq
+:map :Wq :wq
+ 
+" Undo "
+set undodir=/Users/Twise78738/.vim/undo//
+set undofile
+set undolevels=1000
+set undoreload=10000
+ 
+" Autocomplete "
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
-
-"set folding
-set foldenable          " enable folding
-set foldlevelstart=10   " open most folds by default
-set foldnestmax=10      " 10 nested fold max
-set foldmethod=indent   " fold based on indent level
-
-"expected mouse functionality, copy code correct, scroll correct
+ 
+" Mouse "
 set mouse=a
 set clipboard=unnamed
-
-"colorscheme
-syntax on
-set background=dark
-set t_Co=256
-colorscheme badwolf
-
-"cntrl -n  to nerd tree
+ 
+" Sidebar "
 map <C-n> :NERDTreeToggle<CR>
-
-"powerline utility
+ 
+" Bottom Bar "
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-
-"eslint syntastic
+ 
+" Linting "
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
-<<<<<<< HEAD
 let g:syntastic_javascript_checkers = ['eslint']
-
-"map :W to save because i can't type
-:map :W :w
-
-=======
-let g:syntastic_javascript_checkers = ['jslint']
->>>>>>> 28da95ff5186d54f553b66ed3cd7596fc2a77535
+ 
+" Prettification "
+let g:prettier#quickfix_enabled = 0
+let g:prettier#autoformat = 0
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
