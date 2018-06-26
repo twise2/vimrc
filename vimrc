@@ -72,7 +72,8 @@ set t_Co=256
 syntax enable
 set background=dark
 let g:solarized_termcolors=256
-colorscheme badwolf
+colorscheme molokai
+
  
 " Keyboard "
 if has("autocmd")
@@ -124,4 +125,5 @@ let g:syntastic_javascript_checkers = ['eslint']
 " Prettification "
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+"run prettire on save"
+"autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
