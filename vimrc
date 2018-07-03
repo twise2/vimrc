@@ -59,6 +59,7 @@ set incsearch       " search as characters are entered "
 set tabstop=2       " number of visual spaces per tab "
 set softtabstop=0   " number of spaces in tab when editing "
 set shiftwidth=2
+set foldlevel=99    " unfold on start "
 set expandtab       " tabs are spaces "
 set smarttab
 set number          " show line numbers "
@@ -72,7 +73,7 @@ set t_Co=256
 syntax enable
 set background=dark
 let g:solarized_termcolors=256
-colorscheme molokai
+colorscheme CandyPaper
 
  
 " Keyboard "
@@ -125,5 +126,6 @@ let g:syntastic_javascript_checkers = ['eslint']
 " Prettification "
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
-"run prettire on save"
+
+"run prettier on save"
 "autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
