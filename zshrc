@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-archey
+archey --offline 
+alias python=python3
+alias pip=pip3
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/Twise78738/.oh-my-zsh
