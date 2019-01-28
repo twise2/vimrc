@@ -14,7 +14,9 @@ call vundle#rc()
 " rclet Vundle manage Vundle, required "
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ajh17/VimCompletesMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tpope/vim-sensible'
@@ -28,6 +30,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-bundler'
 Plugin 'pangloss/vim-javascript'
+Plugin 'numirias/semshi'
 Plugin 'mxw/vim-jsx'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'leshill/vim-json'
@@ -98,7 +101,7 @@ set undoreload=10000
 " Autocomplete "
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
 
 " Mouse "
 set mouse=a
@@ -117,6 +120,7 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_theme='raven'
 
 " Linting "
 set statusline+=%#warningmsg#
