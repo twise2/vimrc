@@ -1,13 +1,13 @@
 " Disable compatibility with vi "
 set nocompatible
- 
+
 " Set up Vundle if needed "
 let iCanHazVundle=1
 if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
     !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     let iCanHazVundle=0
 endif
- 
+
 " Vundle "
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
@@ -28,6 +28,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-bundler'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'leshill/vim-json'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -45,9 +46,9 @@ if iCanHazVundle == 0
     :PluginInstall
 endif
 call vundle#end()
- 
+
 filetype plugin indent on
- 
+
 " Formatting "
 hi Comment      ctermfg=lightblue " Set comments to light blue "
 set cursorline
@@ -73,9 +74,9 @@ set t_Co=256
 syntax enable
 set background=dark
 let g:solarized_termcolors=256
-colorscheme CandyPaper
+colorscheme Monokai
 
- 
+
 " Keyboard "
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -87,31 +88,36 @@ nnoremap k gk
 :map :WQ :wq
 :map :wQ :wq
 :map :Wq :wq
- 
+
 " Undo "
 set undodir=/Users/Twise78738/.vim/undo//
 set undofile
 set undolevels=1000
 set undoreload=10000
- 
+
 " Autocomplete "
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
- 
+
 " Mouse "
 set mouse=a
+set mouse=v
 set clipboard=unnamed
- 
+if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+endif
+
+
 " Sidebar "
 map <C-n> :NERDTreeToggle<CR>
- 
+
 " Bottom Bar "
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
- 
+
 " Linting "
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -122,10 +128,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
 let g:syntastic_javascript_checkers = ['eslint']
- 
+
 " Prettification "
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
+
+"remove whitespace on save"
+autocmd BufWritePre * :%s/\s\+$//e
 
 "run prettier on save"
 "autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
