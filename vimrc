@@ -35,8 +35,6 @@ Plugin 'mxw/vim-jsx'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'leshill/vim-json'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plugin 'othree/html5.vim'
-Plugin 'indenthtml.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/xml.vim'
 Plugin 'hdima/python-syntax'
@@ -78,6 +76,8 @@ syntax enable
 set background=dark
 let g:solarized_termcolors=256
 colorscheme Monokai
+"colors i like
+" Monokai zellner badwolf blacksea blueprint beekai blackboard adaryn wasabi256 Atelier_DuneDark
 
 
 " Keyboard "
@@ -132,10 +132,14 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
 let g:syntastic_javascript_checkers = ['eslint']
+let syntastic_mode_map = { 'passive_filetypes': ['html'] }
 
 " Prettification "
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
+" html prettier
+let g:prettier#config#html_whitespace_sensitivity = 'css'
+
 
 "remove whitespace on save"
 autocmd BufWritePre * :%s/\s\+$//e

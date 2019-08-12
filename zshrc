@@ -1,8 +1,11 @@
 # If you come from bash you might have to change your $PATH.
+export ANDROID_SDK=/Users/Twise78738/Library/Android/sdk
+
+export PATH="/anaconda3/bin:$PATH"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-archey --offline 
-alias python=python3
-alias pip=pip3
+
+archey --offline
+#alias pip=pip3
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/Twise78738/.oh-my-zsh
@@ -91,8 +94,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
 #vim bindings in zshell, use esc... etc to switch
 bindkey -v
 #keep reverse search going bakc in vim binding
 bindkey '^R' history-incremental-search-backward
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/opt/libiconv/bin:$PATH"
+. /anaconda3/etc/profile.d/conda.sh
+export PATH="/usr/local/sbin:$PATH"
