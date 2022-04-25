@@ -25,6 +25,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'mutewinter/nginx.vim'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'Syntastic'
+Plugin 'quramy/tsuquyomi'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-haml'
@@ -141,9 +142,14 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_checks=['tsc', 'tslint']
-let g:syntastic_typescript_tsc_fname = ''
+let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+let g:syntastic_aggregate_errors = 1
+
+"let g:syntastic_typescript_tsc_fname = ''
+let g:syntastic_javascript_eslint_args = ['--fix']
 let syntastic_mode_map = { 'passive_filetypes': ['html'] }
+
+"let g:syntastic_debug = 1
 
 
 " Prettification "
