@@ -14,6 +14,7 @@ call vundle#rc()
 " rclet Vundle manage Vundle, required "
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'chrisbra/Colorizer'
 "Plugin 'ervandew/supertab'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ajh17/VimCompletesMe'
@@ -30,11 +31,11 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-bundler'
 Plugin 'pangloss/vim-javascript'
-Plugin 'numirias/semshi'
+"Plugin 'numirias/semshi'
 Plugin 'mxw/vim-jsx'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'leshill/vim-json'
-Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'python', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/xml.vim'
 Plugin 'hdima/python-syntax'
@@ -70,7 +71,10 @@ filetype indent on  " load filetype-specific indent files "
 set wildmenu        " visual autocomplete for command menu "
 set lazyredraw      " redraw only when we need to. "
 set showmatch       " highlight matching [{()}] "
+
 syntax on
+set re=0            " make typescript not a bad time
+
 set t_Co=256
 syntax enable
 set background=dark
@@ -84,6 +88,7 @@ colorscheme Monokai
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
 nnoremap j gj
 nnoremap k gk
 :map :W :w
@@ -92,8 +97,9 @@ nnoremap k gk
 :map :wQ :wq
 :map :Wq :wq
 
+
 " Undo "
-set undodir=/Users/Twise78738/.vim/undo//
+set undodir=/Users/tristanwise/.vim/undo/
 set undofile
 set undolevels=1000
 set undoreload=10000
@@ -107,9 +113,12 @@ set omnifunc=syntaxcomplete#Complete
 set mouse=a
 set mouse=v
 set clipboard=unnamed
-if has("unnamedplus") " X11 support
-    set clipboard+=unnamedplus
-endif
+
+
+"set spellcheck"
+":set spell spelllang=en_us
+":setlocal spell spelllang=en_us
+
 
 
 " Sidebar "
@@ -128,21 +137,35 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_typescript_checks=['tsc', 'tslint']
+let g:syntastic_typescript_tsc_fname = ''
 let syntastic_mode_map = { 'passive_filetypes': ['html'] }
+
 
 " Prettification "
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
 " html prettier
 let g:prettier#config#html_whitespace_sensitivity = 'css'
+let g:prettier#config#trailingComma = 'all'
+let g:prettier#exec_cmd_path = "/Users/tristanwise/.nvm/versions/node/v14.4.0/bin/prettier"
+
+" hex code color highlight
+let g:colorizer_auto_color = 1 
+let g:Hexokinase_highlighters = ['backgroundfull']
+let g:colorizer_colornames = 0
+augroup auto_colorize
+autocmd!
+autocmd FileType * :ColorHighlight
+augroup END
 
 
 "remove whitespace on save"
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e"
 
 "run prettier on save"
 "autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
