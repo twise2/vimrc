@@ -36,6 +36,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'leshill/vim-json'
+Plugin 'sbdchd/neoformat'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'python', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/xml.vim'
@@ -53,7 +54,9 @@ call vundle#end()
 filetype plugin indent on
 
 " Formatting "
-hi Comment      ctermfg=lightblue " Set comments to light blue "
+
+"Set comments to light blue"
+hi Comment ctermfg=lightblue 
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey40 " sets cursorline to be bold and not white underline "
 set backspace=indent,eol,start                  " make backspace work like it should "
@@ -137,12 +140,13 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['pyflake']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+"let g:syntastic_typescript_checkers = ['tsc', 'tslint'] " You shouldn't use 'tsc' checker.
 let g:syntastic_aggregate_errors = 1
 
 "let g:syntastic_typescript_tsc_fname = ''
@@ -150,6 +154,10 @@ let g:syntastic_javascript_eslint_args = ['--fix']
 let syntastic_mode_map = { 'passive_filetypes': ['html'] }
 
 "let g:syntastic_debug = 1
+"Have syntastic work with .tag files
+augroup filetype
+    autocmd! BufRead,BufNewFile  *.tag  set filetype=javascript
+augroup END
 
 
 " Prettification "
@@ -166,6 +174,7 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 let g:colorizer_colornames = 0
 augroup auto_colorize
 autocmd!
+"let g:colorizer_debug = 1
 autocmd FileType * :ColorHighlight
 augroup END
 
