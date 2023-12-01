@@ -11,6 +11,7 @@ endif
 " Vundle "
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
+Plugin 'SiegeEngineers/vim-aoe2-rms'
 " rclet Vundle manage Vundle, required "
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
