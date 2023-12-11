@@ -104,10 +104,13 @@ nnoremap k gk
 
 
 " Undo "
-set undodir=/Users/tristanwise/.vim/undo/
+" Set up persistent undo across all files.
 set undofile
-set undolevels=1000
-set undoreload=10000
+if !isdirectory(expand("$HOME/.vim/undodir"))
+  call mkdir(expand("$HOME/.vim/undodir"), "p")
+endif
+set undodir=$HOME/.vim/undodir
+
 
 " Autocomplete "
 filetype plugin on
